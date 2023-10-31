@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>The JavaScript language</title>
+</head>
+<body>
+    <div class="page">
+        <nav id="navbar">
+            <header>
+                <h1>The JavaScript language</h1>
+            </header>
+            <ul>
+                <li><a class="nav-link" href="#An_Introduction_to_JavaScript" >An Introduction to JavaScript</a></li>
+                <li><a class="nav-link" href="#Manuals_and_specifications" >Manuals and specifications</a></li>
+                <li><a class="nav-link" href="#Code_editors" >Code editors</a></li>
+                <li><a class="nav-link" href="#Developer_console" >Developer console</a></li>
+                <li><a class="nav-link" href="#Hello_world" >Hello world</a></li>
+                <li><a class="nav-link" href="#Variables" >Variables</a></li>
+                <li><a class="nav-link" href="#Declaring_variables">Declaring variables</a></li>
+                <li><a class="nav-link" href="#Variable_scope" >Variable scope</a></li>
+                <li><a class="nav-link" href="#Global_variables">Global variables</a></li>
+                <li><a class="nav-link" href="#Constants" >Constants</a></li>
+                <li><a class="nav-link" href="#if...else_statement" >if...else statement</a></li>
+                <li><a class="nav-link" href="#Summary">Summary</a></li>
+            </ul>
+        </nav>
+        <main id="main-doc">
+            <div class="info">
+                <div class="flexable">
+                    <div class="infoHeader" >
+                        <header><h1>The JavaScript language</h1></header>
+                        <p>Here we learn JavaScript, starting from scratch and go on to advanced concepts like OOP.</p>
+                        <p>We concentrate on the language itself here, with the minimum of environment-specific notes.</p>
+                    </div>
+                    <section id="An_Introduction_to_JavaScript" class="main-section">
+                        <header>
+                            An Introduction to JavaScript
+                        </header>
+                        <div class="main-sectioninfo">
+                        <p>Let’s see what’s so special about JavaScript, what we can achieve with it, and what other technologies play well with it.</p>
+                        <h3>What is JavaScript?</h3>
+                        <p>JavaScript was initially created to “make web pages alive”.</p>
+                        <p>The programs in this language are called scripts. They can be written right in a web page’s HTML and run automatically as the page loads.</p>
+                        <p>Scripts are provided and executed as plain text. They don’t need special preparation or compilation to run.</p>
+                        <p>In this aspect, JavaScript is very different from another language called Java.</p>
+                        <div class="bordered">
+                            <h3>Why is it called JavaScript?</h3>
+                            <p>When JavaScript was created, it initially had another name: “LiveScript”. But Java was very popular at that time, so it was decided that positioning a new language as a “younger brother” of Java would help.</p>
+                            <p>But as it evolved, JavaScript became a fully independent language with its own specification called ECMAScript, and now it has no relation to Java at all.</p>
+                        </div>
+                        <p>Today, JavaScript can execute not only in the browser, but also on the server, or actually on any device that has a special program called the JavaScript engine.</p>
+                        <p>The browser has an embedded engine sometimes called a “JavaScript virtual machine”.</p>
+                        <p>Different engines have different “codenames”. For example:</p>
+                        <ul>
+                            <li>V8 – in Chrome, Opera and Edge.</li>
+                            <li>SpiderMonkey – in Firefox.</li>
+                            <li>…There are other codenames like “Chakra” for IE, “JavaScriptCore”, “Nitro” and “SquirrelFish” for Safari, etc.</li>
+                        </ul>
+                        <p>The terms above are good to remember because they are used in developer articles on the internet. We’ll use them too. For instance, if “a feature X is supported by V8”, then it probably works in Chrome, Opera and Edge.</p>
+                        <div class="bordered">
+                            <h3>How do engines work?</h3>
+                            <p>Engines are complicated. But the basics are easy.</p>
+                            <ol>
+                                <li>The engine (embedded if it’s a browser) reads (“parses”) the script.</li>
+                                <li>Then it converts (“compiles”) the script to machine code.</li>
+                                <li>And then the machine code runs, pretty fast.</li>
+                            </ol>
+                            <p>The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.</p>
+                        </div>
+                        <h2>What can in-browser JavaScript do?</h2>
+                        <p>Modern JavaScript is a “safe” programming language. It does not provide low-level access to memory or the CPU, because it was initially created for browsers which do not require it.</p>
+                        <p>JavaScript’s capabilities greatly depend on the environment it’s running in. For instance, Node.js supports functions that allow JavaScript to read/write arbitrary files, perform network requests, etc.</p>
+                        <p>In-browser JavaScript can do everything related to webpage manipulation, interaction with the user, and the webserver.</p>
+                        <p>For instance, in-browser JavaScript is able to:</p>
+                        <ul>
+                            <li>Add new HTML to the page, change the existing content, modify styles.</li>
+                            <li>React to user actions, run on mouse clicks, pointer movements, key presses.</li>
+                            <li>Send requests over the network to remote servers, download and upload files (so-called AJAX and COMET technologies).</li>
+                            <li>Get and set cookies, ask questions to the visitor, show messages.</li>
+                            <li>Remember the data on the client-side (“local storage”).</li>
+                        </ul>
+                        <h2>What CAN’T in-browser JavaScript do?</h2>
+                        <p>JavaScript’s abilities in the browser are limited to protect the user’s safety. The aim is to prevent an evil webpage from accessing private information or harming the user’s data.</p>
+                        <p>Examples of such restrictions include:</p>
+                        <ul>
+                            <li>
+                                JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
+                                <p>Modern browsers allow it to work with files, but the access is limited and only provided if the user does certain actions, like “dropping” a file into a browser window or selecting it via an input tag.</p>
+                                <p>There are ways to interact with the camera/microphone and other devices, but they require a user’s explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the NSA.</p>
+                            </li>
+                            <li>Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other page if they come from different sites (from a different domain, protocol or port).
+                                <p>This is called the “Same Origin Policy”. To work around that, both pages must agree for data exchange and must contain special JavaScript code that handles it. We’ll cover that in the tutorial.</p>
+                                <p>This limitation is, again, for the user’s safety. A page from <strong>http://anysite.com</strong> which a user has opened must not be able to access another browser tab with the URL <strong>http://gmail.com</strong> , for example, and steal information from there.</p>
+                            </li>
+                            <li>JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that’s a safety limitation.</li>
+                        </ul>
+                        <p>Such limitations do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugins/extensions which may ask for extended permissions.</p>
+                        <h3>What makes JavaScript unique?</h3>
+                        <p>There are at least three great things about JavaScript:</p>
+                        <div class="bordered">
+                            <ul>
+                                <li>Full integration with HTML/CSS.</li>
+                                <li>Simple things are done simply.</li>
+                                <li>Supported by all major browsers and enabled by default.</li>
+                            </ul>
+                        </div>
+                        <p>JavaScript is the only browser technology that combines these three things.</p>
+                        <p>That’s what makes JavaScript unique. That’s why it’s the most widespread tool for creating browser interfaces.</p>
+                        <p>That said, JavaScript can be used to create servers, mobile applications, etc.</p>
+                        <h3>Languages “over” JavaScript</h3>
+                        <p>The syntax of JavaScript does not suit everyone’s needs. Different people want different features.</p>
+                        <p>That’s to be expected, because projects and requirements are different for everyone.</p>
+                        <p>So, recently a plethora of new languages appeared, which are transpiled (converted) to JavaScript before they run in the browser.</p>
+                        <p>Modern tools make the transpilation very fast and transparent, actually allowing developers to code in another language and auto-converting it “under the hood”.</p>
+                        <p>Examples of such languages:</p>
+                        <ul>
+                            <li><strong>CoffeeScript </strong>is “syntactic sugar” for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.</li>
+                            <li><strong>TypeScript </strong>is concentrated on adding “strict data typing” to simplify the development and support of complex systems. It is developed by Microsoft.</li>
+                            <li><strong>Flow </strong>also adds data typing, but in a different way. Developed by Facebook.</li>
+                            <li><strong>Dart </strong>is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.</li>
+                            <li><strong>Brython </strong>is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.</li>
+                            <li><strong>Kotlin </strong> is a modern, concise and safe programming language that can target the browser or Node.</li>
+                        </ul>
+                        <p>There are more. Of course, even if we use one of these transpiled languages, we should also know JavaScript to really understand what we’re doing.</p>
+                    </div>
+                    </section>
+                    <section id="Manuals_and_specifications" class="main-section">
+                        <header>
+                            Manuals and specifications
+                        </header>
+                        <p>This book is a tutorial. It aims to help you gradually learn the language. But once you’re familiar with the basics, you’ll need other resources.</p>
+                        <h2>Specification</h2>
+                        <p><strong>The ECMA-262 specification </strong>contains the most in-depth, detailed and formalized information about JavaScript. It defines the language.</p>
+                        <p>But being that formalized, it’s difficult to understand at first. So if you need the most trustworthy source of information about the language details, the specification is the right place. But it’s not for everyday use.</p>
+                        <p>A new specification version is released every year. Between these releases, the latest specification draft is at <a href="https://tc39.es/ecma262/">https://tc39.es/ecma262/</a></p>
+                        <p>To read about new bleeding-edge features, including those that are “almost standard” (so-called “stage 3”), see proposals at <a href="https://github.com/tc39/proposals.">https://github.com/tc39/proposals</a></p>
+                        <p>Also, if you’re developing for the browser, then there are other specifications covered in the <a href="https://javascript.info/browser-environment"> second part</a> of the tutorial.</p>
+                        <h2>Manuals</h2>
+                        <ul>
+                            <li><strong>MDN (Mozilla) JavaScript Reference </strong> is the main manual with examples and other information. It’s great to get in-depth information about individual language functions, methods etc.</li>
+                        </ul>
+                        <p>You can find it at <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference</a>.</p>
+                        <p>Although, it’s often best to use an internet search instead. Just use <strong>“MDN [term]”</strong> in the query, e.g.</p>
+                        <p><a href="https://google.com/search?q=MDN+parseInt">https://google.com/search?q=MDN+parseInt</a> to search for the <strong>parseInt</strong> function.</p>
+                        <h2>Compatibility tables</h2>
+                        <p>JavaScript is a developing language, new features get added regularly.</p>
+                        <p>To see their support among browser-based and other engines, see:</p>
+                        <ul>
+                            <li><a href="https://caniuse.com">https://caniuse.com </a> – per-feature tables of support, e.g. to see which engines support modern cryptography functions: <a href="https://caniuse.com/#feat=cryptography">https://caniuse.com/#feat=cryptography</a>.</li>
+                            <li><a href="https://kangax.github.io/compat-table">https://kangax.github.io/compat-table</a>  – a table with language features and engines that support those or don’t support.</li>
+                        </ul>
+                        <p>All these resources are useful in real-life development, as they contain valuable information about language details, their support, etc.</p>
+                        <p>Please remember them (or this page) for the cases when you need in-depth information about a particular feature.</p>
+                    </section>
+                    <section id="Code_editors" class="main-section">
+                        <header>
+                            Code editors
+                        </header>
+                        <p>A code editor is the place where programmers spend most of their time.</p>
+                        <p>There are two main types of code editors: IDEs and lightweight editors. Many people use one tool of each type.</p>
+                        <h2>IDE</h2>
+                        <p>The term <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE </a> (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a “whole project.” As the name suggests, it’s not just an editor, but a full-scale “development environment.”</p>
+                        <p>An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like git), a testing environment, and other “project-level” stuff.</p>
+                        <p>If you haven’t selected an IDE yet, consider the following options:</p>
+                        <ul>
+                            <li><a href="https://code.visualstudio.com/">Visual Studio Code</a> (cross-platform, free).</li>
+                            <li><a href="https://www.jetbrains.com/webstorm/">WebStorm</a> (cross-platform, paid).</li>
+                        </ul>
+                        <p>For Windows, there’s also “Visual Studio”, not to be confused with “Visual Studio Code”. “Visual Studio” is a paid and mighty Windows-only editor, well-suited for the .NET platform. It’s also good at JavaScript. There’s also a free version <a href="https://www.visualstudio.com/vs/community/">Visual Studio Community</a>.</p>
+                        <p>Many IDEs are paid, but have a trial period. Their cost is usually negligible compared to a qualified developer’s salary, so just choose the best one for you.</p>
+                        <h2>Lightweight editors</h2>
+                        <p>“Lightweight editors” are not as powerful as IDEs, but they’re fast, elegant and simple.</p>
+                        <p>They are mainly used to open and edit a file instantly.</p>
+                        <p>The main difference between a “lightweight editor” and an “IDE” is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.</p>
+                        <p>In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there’s no strict border between a lightweight editor and an IDE.</p>
+                        <p>There are many options, for instance:</p>
+                        <ul>
+                            <li><a href="https://www.sublimetext.com/">Sublime Text</a> (cross-platform, shareware).</li>
+                            <li><a href="https://notepad-plus-plus.org/">Notepad++</a> (Windows, free).</li>
+                            <li><a href="https://www.vim.org/">Vim</a> and <a href="https://www.gnu.org/software/emacs/">Emacs</a> are also cool if you know how to use them.</li>
+                        </ul>
+                        <h2>Let’s not argue</h2>
+                        <p>The editors in the lists above are those that either I or my friends whom I consider good developers have been using for a long time and are happy with.</p>
+                        <p>There are other great editors in our big world. Please choose the one you like the most.</p>
+                        <p>The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.</p>
+                        <p>The author’s personal opinion:</p>
+                        <ul>
+                            <li> I’d use <a href="https://code.visualstudio.com/">Visual Studio Code</a> if I develop mostly frontend.</li>
+                            <li>Otherwise, if it’s mostly another language/platform and partially frontend, then consider other editors, such as XCode (Mac), Visual Studio (Windows) or Jetbrains family (Webstorm, PHPStorm, RubyMine etc, depending on the language).</li>
+                        </ul>
+                    </section>
+                    <section id="Developer_console" class="main-section">
+                        <header>
+                            Developer console
+                        </header>
+                        <p>Code is prone to errors. You will quite likely make errors… Oh, what am I talking about? You are absolutely going to make errors, at least if you’re a human, not a <a href="https://en.wikipedia.org/wiki/Bender_(Futurama)">robot</a>.</p>
+                        <p>But in the browser, users don’t see errors by default. So, if something goes wrong in the script, we won’t see what’s broken and can’t fix it.</p>
+                        <p>To see errors and get a lot of other useful information about scripts, “developer tools” have been embedded in browsers.</p>
+                        <p>Most developers lean towards Chrome or Firefox for development because those browsers have the best developer tools. Other browsers also provide developer tools, sometimes with special features, but are usually playing “catch-up” to Chrome or Firefox. So most developers have a “favorite” browser and switch to others if a problem is browser-specific.</p>
+                        <p>Developer tools are potent; they have many features. To start, we’ll learn how to open them, look at errors, and run JavaScript commands.</p>
+                        <h3>Google Chrome</h3>
+                        <p>Open the page <a href="https://javascript.info/article/devtools/bug.html">bug.html</a>.</p>
+                        <p>There’s an error in the JavaScript code on it. It’s hidden from a regular visitor’s eyes, so let’s open developer tools to see it.</p>
+                        <p>Press <strong>F12</strong> or, if you’re on Mac, then <strong>Cmd+Opt+J</strong>.</p>
+                        <p>The developer tools will open on the Console tab by default.</p>
+                        <p>It looks somewhat like this:</p>
+                        <img src="https://javascript.info/article/devtools/chrome@2x.png" alt="image">
+                        <p>The exact look of developer tools depends on your version of Chrome. It changes from time to time but should be similar.</p>
+                        <ul>
+                            <li>Here we can see the red-colored error message. In this case, the script contains an unknown “lalala” command.</li>
+                            <li>On the right, there is a clickable link to the source <strong>bug.html:12</strong> with the line number where the error has occurred.</li>
+                        </ul>
+                        <p>Below the error message, there is a blue <strong> > </strong> symbol. It marks a “command line” where we can type JavaScript commands. Press <strong>Enter</strong> to run them.</p>
+                        <p>Now we can see errors, and that’s enough for a start. We’ll come back to developer tools later and cover debugging more in-depth in the chapter</p>
+                        <div class="bordered">
+                            <h3>Multi-line input</h3>
+                            <p>Usually, when we put a line of code into the console, and then press <strong>Enter</strong> , it executes.</p>
+                            <p>To insert multiple lines, press <strong>Shift+Enter</strong> . This way one can enter long fragments of JavaScript code.</p>
+                        </div>
+                        <h2>Firefox, Edge, and others</h2>
+                        <p>Most other browsers use <strong>F12</strong> to open developer tools.</p>
+                        <p>The look & feel of them is quite similar. Once you know how to use one of these tools (you can start with Chrome), you can easily switch to another.</p>
+                        <h2>Safari</h2>
+                        <p>Safari (Mac browser, not supported by Windows/Linux) is a little bit special here. We need to enable the “Develop menu” first.</p>
+                        <p>Open Preferences and go to the “Advanced” pane. There’s a checkbox at the bottom:</p>
+                        <img src="https://javascript.info/article/devtools/safari@2x.png" alt="image" id="header-img">
+                        <p>Now <strong>Cmd+Opt+C</strong> can toggle the console. Also, note that the new top menu item named “Develop” has appeared. It has many commands and options.</p>
+                    </section>
+                    
+                    <section id="Hello_world"  class="main-section">
+                        <header>
+                            Hello world
+                        </header>
+                        <p>To get started with writing JavaScript, open the Scratchpad and write your first "Hello world" JavaScript code:</p>
+                        <code>function greetMe(yourName) { alert("Hello " + yourName); }
+                            greetMe("World");</code>
+                        <p>Select the code in the pad and hit Ctrl+R to watch it unfold in your browser!</p>
+                    </section>
+
+                    <section id="Variables"  class="main-section">
+                        <header>
+                            Variables
+                        </header>
+                        <p>You use variables as symbolic names for values in your application. The names of variables, called identifiers, conform to certain rules.</p>
+                        <p>A JavaScript identifier must start with a letter, underscore (_), or dollar sign ($); subsequent characters can also be digits (0-9). Because JavaScript is case sensitive, letters include the characters "A" through "Z" (uppercase) and the characters "a" through "z" (lowercase).</p>
+                        <p>You can use ISO 8859-1 or Unicode letters such as å and ü in identifiers. You can also use the Unicode escape sequences as characters in identifiers. Some examples of legal names are Number_hits, temp99, and _name.</p>
+                    </section>
+
+                    <section id="Declaring_variables"  class="main-section">
+                        <header>
+                            Declaring variables
+                        </header>
+                        <p>You can declare a variable in three ways:</p>
+                        <p>With the keyword var. For example,</p>
+                        <code>var x = 42.</code>
+                        <p>This syntax can be used to declare both local and global variables.</p>
+                        <p>By simply assigning it a value. For example,</p>
+                        <code>x = 42.</code>
+                        <p>This always declares a global variable. It generates a strict JavaScript warning. You shouldn't use this variant.</p>
+                        <p>With the keyword let. For example,</p>
+                        <code> let y = 13.</code>
+                        <p>This syntax can be used to declare a block scope local variable. See Variable scope below.</p>
+                    </section>
+
+                    <section id="Variable_scope"  class="main-section">
+                        <header>
+                            Variable scope
+                        </header>
+                        <p>When you declare a variable outside of any function, it is called a global variable, because it is available to any other code in the current document. When you declare a variable within a function, it is called a local variable, because it is available only within that function.</p>
+                        <p>JavaScript before ECMAScript 2015 does not have block statement scope; rather, a variable declared within a block is local to the function (or global scope) that the block resides within. For example the following code will log 5, because the scope of x is the function (or global context) within which x is declared, not the block, which in this case is an if statement.</p>
+                        <code>if (true) { var x = 5; } console.log(x); // 5</code>
+                        <p>This behavior changes, when using the let declaration introduced in ECMAScript 2015.</p>
+                        <code>if (true) { let y = 5; } console.log(y); // ReferenceError: y is
+                            not defined</code>
+                    </section>
+
+                    <section id="Global_variables"  class="main-section">
+                        <header>
+                            Global variables
+                        </header>
+                        <p>Global variables are in fact properties of the global object. In web pages the global object is window, so you can set and access global variables using the window.variable syntax.</p>
+                        <p>Consequently, you can access global variables declared in one window or frame from another window or frame by specifying the window or frame name. For example, if a variable called phoneNumber is declared in a document, you can refer to this variable from an iframe as parent.phoneNumber.</p>
+                    </section>
+
+                    <section id="Constants" class="main-section">
+                        <header>
+                            Constants
+                        </header>
+                        <p>You can create a read-only, named constant with the const keyword. The syntax of a constant identifier is the same as for a variable identifier: it must start with a letter, underscore or dollar sign and can contain alphabetic, numeric, or underscore characters.</p>
+                        <code>const PI = 3.14;</code>
+                        <p>A constant cannot change value through assignment or be re-declared while the script is running. It has to be initialized to a value.</p>
+                        <p>The scope rules for constants are the same as those for let block scope variables. If the const keyword is omitted, the identifier is assumed to represent a variable.</p>
+                        <p>You cannot declare a constant with the same name as a function or variable in the same scope. For example:</p>
+                        <code>// THIS WILL CAUSE AN ERROR function f() {}; const f = 5; // THIS
+                            WILL CAUSE AN ERROR ALSO function f() { const g = 5; var g;
+                            //statements }</code>
+                        <p>However, object attributes are not protected, so the following statement is executed without problems.</p>
+                        <code>const MY_OBJECT = {"key": "value"}; MY_OBJECT.key =
+                            "otherValue";</code>
+                    </section>
+
+                    <section class="main-section" id="if...else_statement">
+                        <header>
+                            if...else statement
+                        </header>
+                        <p>Use the if statement to execute a statement if a logical condition is true. Use the optional else clause to execute a statement if the condition is false. An if statement looks as follows:</p>
+                        <code>if (condition) { statement_1; } else { statement_2; }</code>
+                        <p>condition can be any expression that evaluates to true or false. See Boolean for an explanation of what evaluates to true and false. If condition evaluates to true, statement_1 is executed; otherwise, statement_2 is executed. statement_1 and statement_2 can be any statement, including further nested if statements.</p>
+                        <p>You may also compound the statements using else if to have multiple conditions tested in sequence, as follows:</p>
+                        <code>
+                            if (condition_1) { statement_1; } else if (condition_2) {
+                            statement_2; } else if (condition_n) { statement_n; } else {
+                            statement_last; }
+                        </code>
+                        <p>In the case of multiple conditions only the first logical condition which evaluates to true will be executed. To execute multiple statements, group them within a block statement ({ ... }) . In general, it's good practice to always use block statements, especially when nesting if statements:</p>
+                        <code>
+                            if (condition) { statement_1_runs_if_condition_is_true;
+                                statement_2_runs_if_condition_is_true; } else {
+                                statement_3_runs_if_condition_is_false;
+                                statement_4_runs_if_condition_is_false; }
+                        </code>
+                        <p>It is advisable to not use simple assignments in a conditional expression, because the assignment can be confused with equality when glancing over the code. For example, do not use the following code:</p>
+                        <code>if (x = y) { /* statements here */ }</code>
+                        <p>If you need to use an assignment in a conditional expression, a common practice is to put additional parentheses around the assignment. For example:</p>
+                        <code>if ((x = y)) { /* statements here */ }</code>
+                    </section>
+
+                    <section id="Summary" class="main-section">
+                        <header>
+                            Summary
+                        </header>
+                        <ul>
+                            <li>JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.</li>
+                            <li>Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.</li>
+                            <li>There are many languages that get “transpiled” to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.</li>
+                            <li>Developer tools allow us to see errors, run commands, examine variables, and much more.</li>
+                            <li>They can be opened with F12 for most browsers on Windows. Chrome for Mac needs Cmd+Opt+J, Safari: Cmd+Opt+C (need to enable first).</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
